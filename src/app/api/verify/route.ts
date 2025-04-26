@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; // ✅ Must be FIRST
+
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
 
