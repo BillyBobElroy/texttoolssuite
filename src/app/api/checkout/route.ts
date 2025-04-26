@@ -1,25 +1,29 @@
-import { NextRequest, NextResponse } from "next/server"
-import Stripe from "stripe"
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-03-31.basil",
-})
+import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
 
 export async function POST(req: NextRequest) {
-  const origin = req.headers.get("origin") || "http://localhost:3000"
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: "2025-03-31.basil",
+  });
 
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    mode: "payment",
-    line_items: [
-      {
-        price: "price_ABC123...", // Replace with your actual Stripe price ID
-        quantity: 1,
-      },
-    ],
-    success_url: `${origin}/download`,
-    cancel_url: `${origin}/`,
-  })
+  const body = await req.text();
+  const sig = req.headers.get("stripe-signature")!;
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-  return NextResponse.json({ url: session.url })
+  let event: Stripe.Event;
+
+  try {
+    event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
+  } catch (err) {
+    console.error("Webhook signature verification failed.", (err as Error).message);
+    return new NextResponse("Webhook Error", { status: 400 });
+  }
+
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object as Stripe.Checkout.Session;
+    console.log("✅ Payment successful:", session.id);
+    // TODO: Save session ID to allow download
+  }
+
+  return NextResponse.json({ received: true });
 }
