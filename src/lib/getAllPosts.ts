@@ -1,4 +1,3 @@
-// lib/getAllPosts.ts
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
@@ -12,30 +11,28 @@ export type Post = {
   description: string;
 };
 
-export async function getAllPosts() {
+export async function getAllPosts(): Promise<Post[]> {
   try {
     const files = await fs.readdir(postsDir);
 
     const posts = await Promise.all(
-      files.map(async (file: string) => {
+      files.map(async (file: string): Promise<Post> => {
         const filePath = path.join(postsDir, file);
         const raw = await fs.readFile(filePath, "utf-8");
         const { data } = matter(raw);
 
-        const post: Post = {
+        return {
           slug: data.slug || file.replace(/\.mdx$/, ""),
           title: data.title,
           date: data.date,
           description: data.description,
         };
-
-        return post;
       })
     );
 
     return posts.sort((a, b) => (a.date > b.date ? -1 : 1));
-  } catch (err: any) {
-    if (err.code === "ENOENT") {
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === "ENOENT") {
       console.warn("⚠️ No blog directory found at:", postsDir);
       return [];
     }
