@@ -2,8 +2,6 @@ export const dynamic = "force-dynamic";
 
 import { toolComponents } from "@/lib/toolRegistry";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Sidebar from "@/components/navigation/Sidebar";
 import ThreadedComments from "@/components/ui/ThreadedComments";
 

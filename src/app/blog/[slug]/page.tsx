@@ -1,12 +1,5 @@
 import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/lib/getPostBySlug";
-import Link from "next/link";
-
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

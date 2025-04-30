@@ -17,7 +17,7 @@ export async function getAllPosts() {
     const files = await fs.readdir(postsDir);
 
     const posts = await Promise.all(
-      files.map(async (file) => {
+      files.map(async (file: string) => {
         const filePath = path.join(postsDir, file);
         const raw = await fs.readFile(filePath, "utf-8");
         const { data } = matter(raw);
