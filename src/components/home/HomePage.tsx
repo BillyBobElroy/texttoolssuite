@@ -1,7 +1,5 @@
 "use client"
 import React from "react"
-import Navbar from "@/components/layout/Navbar"
-import Footer from "@/components/layout/Footer"
 import Divider from "@/components/layout/Divider"
 import HeroSection from "@/components/home/HeroSection"
 import WhySection from "@/components/home/WhySection"
@@ -14,7 +12,6 @@ export default function HomePageClient() {
 
   return (
     <>
-      <Navbar />
       <main>
         <HeroSection />
         <WhySection />
@@ -22,7 +19,6 @@ export default function HomePageClient() {
         <Divider />
         <CTASection />
       </main>
-      <Footer />
     </>
   )
 }

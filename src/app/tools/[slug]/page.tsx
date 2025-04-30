@@ -23,8 +23,6 @@ export default async function ToolPage({
 
   return (
     <>
-      <Navbar />
-
       <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-x-8">
         {/* Sidebar */}
         <aside className="hidden sm:block w-64 shrink-0">
@@ -54,8 +52,6 @@ export default async function ToolPage({
           <ThreadedComments slug={slug} />
         </main>
       </div>
-
-      <Footer />
     </>
   );
 }

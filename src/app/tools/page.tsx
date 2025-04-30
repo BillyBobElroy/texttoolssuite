@@ -8,7 +8,6 @@ export const dynamic = "force-dynamic";
 export default function AllToolsPage() {
   return (
     <>
-      <Navbar />
       <div className="max-w-6xl mx-auto px-6 py-16 space-y-16">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-extrabold tracking-tight text-black">All Text Tools</h1>
@@ -21,7 +20,6 @@ export default function AllToolsPage() {
           <AllToolsClient />
         </Suspense>
       </div>
-      <Footer />
     </>
   );
 }

@@ -21,8 +21,8 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/tools", label: "All Tools" },
-    { href: "/random", label: "FAQ" },
-    { href: "/toolkit/landing", label: "Download" },
+    { href: "/blog", label: "Blog" },
+    //{ href: "/random", label: "FAQ" },
   ]
 
   return (
