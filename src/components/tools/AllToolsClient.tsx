@@ -14,17 +14,10 @@ export default function AllToolsClient() {
   const searchParams = useSearchParams();
   const activeTagParam = searchParams.get("tag");
   const [activeTag, setActiveTag] = useState<string | null>(activeTagParam);
-  const [query, setQuery] = useState("")
 
-  const filteredTools = tools.filter((tool) => {
-    const matchesTag = activeTag ? toolTags[tool.slug]?.includes(activeTag) : true
-    const matchesQuery =
-      query === "" ||
-      tool.name.toLowerCase().includes(query.toLowerCase()) ||
-      tool.description.toLowerCase().includes(query.toLowerCase())
-  
-    return matchesTag && matchesQuery
-  })
+  const filteredTools = activeTag
+    ? tools.filter((tool) => toolTags[tool.slug]?.includes(activeTag))
+    : tools;
 
   const grouped: Record<string, typeof tools> = {};
   for (const tool of filteredTools) {
