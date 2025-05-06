@@ -4,12 +4,10 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
-import SearchBar from "@/components/ui/SearchBar"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [query, setQuery] = useState("")
   const pathname = usePathname()
 
   useEffect(() => {
@@ -56,7 +54,6 @@ export default function Navbar() {
         {/* Right Side */}
         <div className="flex items-center gap-4">
           <div className="hidden sm:block">
-            <SearchBar query={query} onChange={setQuery} />
           </div>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
