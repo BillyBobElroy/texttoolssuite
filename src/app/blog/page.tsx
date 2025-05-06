@@ -34,6 +34,7 @@ export default async function BlogPage() {
                 day: "numeric",
               })}{" "}
             </p>
+            <p className="text-gray-700 leading-relaxed">{post.summary}</p>
             <p className="text-sm text-gray-700">{post.description}</p>
           </Link>
         ))}

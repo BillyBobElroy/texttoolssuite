@@ -9,6 +9,7 @@ export type Post = {
   title: string;
   date: string;
   description: string;
+  summary: string;
 };
 
 export async function getAllPosts(): Promise<Post[]> {
@@ -26,6 +27,7 @@ export async function getAllPosts(): Promise<Post[]> {
           title: data.title,
           date: data.date,
           description: data.description,
+          summary: data.summary,
         };
       })
     );
